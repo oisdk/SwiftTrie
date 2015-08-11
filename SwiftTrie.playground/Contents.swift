@@ -1,21 +1,21 @@
-var numbers = Trie([[1, 2, 3], [4, 5, 6], [1, 2, 3, 4], [1, 2], [5, 4, 3], [8]])
+let words = ["hello", "hiya", "hell", "jonah", "jolly", "joseph"].map{$0.characters}
 
-numbers.contains([4, 5, 6])
+var store = Trie(words)
 
-numbers.contains([4, 5])
+store
+  .map(String.init)
 
-numbers.remove([4, 5, 6])
 
-numbers.insert([7, 3, 1])
+store
+  .contains("hello".characters)
 
-let secondNums = Trie([[2, 2, 2], [3, 3, 3]])
+store
+  .completions("hel".characters)
+  .map(String.init)
 
-numbers.union(secondNums)
+store
+  .remove("jonah".characters)
 
-func makeTrie(from: [Int]) -> Trie<Int> {
-  return Trie((0..<3).map { n in
-    from.map { $0 + n }
-  })
-}
-
-numbers.flatMap(makeTrie)
+store
+  .completions("jo".characters)
+  .map(String.init)
